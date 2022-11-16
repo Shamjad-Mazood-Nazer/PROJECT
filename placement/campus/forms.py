@@ -1,4 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import SetPasswordForm
 from django import forms
 from django.db import transaction
 from .models import *
@@ -110,3 +112,7 @@ class LoginForm(forms.ModelForm):
 #     class Meta:
 #         model = Clientcase
 #         exclude = ['user']
+class SetPasswordForm(SetPasswordForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['new_password1', 'new_password2']

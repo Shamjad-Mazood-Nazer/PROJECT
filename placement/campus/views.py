@@ -1,12 +1,16 @@
 from hashlib import sha256
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import SetPasswordForm
+from .forms import SetPasswordForm
+
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib import messages
 from django.contrib import auth
-from django.contrib.auth import login, logout, authenticate, get_user_model
+from django.contrib.auth import authenticate, get_user_model
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.shortcuts import render, redirect
@@ -108,7 +112,7 @@ def tpoLogout(request):
 
 
 def get_user(request):
-    return StudentReg.objects.get(id=request.session['user_id'])
+    return StudentReg.objects.get(user_id=request.session['user_id'])
 
 
 def home(request):
@@ -128,7 +132,7 @@ def studentDashboard(request):
 def logout(request):
     if 'user_id' in request.session:
         del request.session['user_id']  # delete user session
-    return redirect('login')
+    return redirect('home')
 
 
 def tpo(request):
@@ -149,3 +153,10 @@ def adminDash(request):
 
 def index(request):
     return render(request, 'campus/home.html')
+
+
+@login_required
+def password_change(request):
+    user = request.user
+    form = SetPasswordForm(user)
+    return render(request, 'password_reset_form.html', {'form': form})
