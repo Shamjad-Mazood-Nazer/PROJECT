@@ -80,6 +80,9 @@ class StudentDetails(models.Model):
     achievement = models.CharField(max_length=500)
     languagesKnown = models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.name
+
 
 class Tpo(models.Model):
     tpoName = models.CharField(max_length=50)

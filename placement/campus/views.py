@@ -112,7 +112,8 @@ def tpoLogout(request):
 
 
 def get_user(request):
-    return StudentReg.objects.get(user_id=request.session['user_id'])
+    # request.session['admino']=13312
+    return StudentReg.objects.get(user_id=request.session['admino'])
 
 
 def home(request):
