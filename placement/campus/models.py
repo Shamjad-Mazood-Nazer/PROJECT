@@ -18,11 +18,13 @@ class User(AbstractUser):
 
 class StudentReg(models.Model):
     admino = models.CharField(unique=True, max_length=255)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=500, unique=True, default='youremail@gmail.com')
     password = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.email
+        return self.first_name
 
 
 # class StudentReg(models.Model):
@@ -43,9 +45,7 @@ class MCAStudentDetails(models.Model):
         ('male', 'male'),
         ('female', 'female'),
     )
-    universityNo = models.CharField(max_length=13)
-    title = models.CharField(max_length=3)
-    name = models.CharField(max_length=50)
+
     branch = models.CharField(max_length=50, choices=branch)
     DoB = models.DateTimeField(max_length=10)
     gender = models.CharField(max_length=6, choices=gender)
@@ -89,7 +89,7 @@ class MCAStudentDetails(models.Model):
     languagesKnown = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.name
+        return self.branch
 
 
 class BTechStudentDetails(models.Model):
@@ -107,9 +107,6 @@ class BTechStudentDetails(models.Model):
         ('female', 'female'),
     )
 
-    universityNo = models.CharField(max_length=13)
-    title = models.CharField(max_length=3)
-    name = models.CharField(max_length=50)
     branch = models.CharField(max_length=50, choices=branch)
     DoB = models.DateTimeField(max_length=10)
     gender = models.CharField(max_length=6, choices=gender)
@@ -147,7 +144,7 @@ class BTechStudentDetails(models.Model):
     languagesKnown = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.name
+        return self.branch
 
 
 class Tpo(models.Model):

@@ -43,7 +43,7 @@ function nameValidation(inputTxt){
                 textField.style.color = "red";
             }
         }else{
-            textField.textContent = 'your input mut me more than two chracters';
+            textField.textContent = 'your input must be more than two chracters';
             textField.style.color = "red";
         }
     }else{
@@ -70,7 +70,7 @@ function fatherNameValidation(inputTxt){
                 textField.style.color = "red";
             }
         }else{
-            textField.textContent = 'your input mut me more than two chracters';
+            textField.textContent = 'your input must be more than two chracters';
             textField.style.color = "red";
         }
     }else{
@@ -97,7 +97,7 @@ function motherNameValidation(inputTxt){
                 textField.style.color = "red";
             }
         }else{
-            textField.textContent = 'your input mut me more than two chracters';
+            textField.textContent = 'your input must be more than two chracters';
             textField.style.color = "red";
         }
     }else{
@@ -210,7 +210,7 @@ function cityValidation(inputTxt){
                 textField.style.color = "red";
             }
         }else{
-            textField.textContent = 'your input mut me more than two chracters';
+            textField.textContent = 'your input must be more than two chracters';
             textField.style.color = "red";
         }
     }else{
@@ -237,7 +237,7 @@ function districtValidation(inputTxt){
                 textField.style.color = "red";
             }
         }else{
-            textField.textContent = 'your input mut me more than two chracters';
+            textField.textContent = 'your input must be more than two chracters';
             textField.style.color = "red";
         }
     }else{
