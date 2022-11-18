@@ -306,6 +306,26 @@ function dobValidation(inputTxt){
     }
 }
 
+function universityNoValidation(inputTxt){
+
+    var regx = /AJC\d\d+[A-Z]+-\d\d\d\d/;
+    var textField = document.getElementById("universityno");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+
+        }else{
+            textField.textContent = 'only valid number';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
 
 //<!--<script>-->
 //<!--    $(document).ready(function() {-->
