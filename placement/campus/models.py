@@ -35,13 +35,20 @@ class StudentReg(models.Model):
 
 
 class MCAStudentDetails(models.Model):
-
+    branch = (
+        ('mca', 'MCA'),
+        ('intmca', 'INT MCA'),
+    )
+    gender = (
+        ('male', 'male'),
+        ('female', 'female'),
+    )
     universityNo = models.CharField(max_length=13)
     title = models.CharField(max_length=3)
     name = models.CharField(max_length=50)
-    branch = models.CharField(max_length=50)
+    branch = models.CharField(max_length=50, choices=branch)
     DoB = models.DateTimeField(max_length=10)
-    gender = models.CharField(max_length=6)
+    gender = models.CharField(max_length=6, choices=gender)
     mobileNoIndian = models.CharField(max_length=10)
     alternativeNo = models.CharField(max_length=15)
     personalMail = models.CharField(max_length=200)
