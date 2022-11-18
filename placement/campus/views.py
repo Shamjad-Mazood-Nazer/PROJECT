@@ -82,7 +82,7 @@ def login(request):
         password = request.POST['password']
         if StudentReg.objects.filter(email=email, password=password).exists():
             user = StudentReg.objects.get(email=email)
-            request.session['user_id'] = user.admino  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
+            request.session['admino'] = user.admino  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             return redirect('student')
         return render(request, 'campus/login.html', {'form': form})
 
