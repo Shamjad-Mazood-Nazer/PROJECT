@@ -1,7 +1,7 @@
 
 	function admnoValidation(inputTxt){
 
-		var regx = /^[1-9]{4,}$/;
+		var regx = /^[0-9]{4,}$/;
 		var textField = document.getElementById("admno");
 
 		if(inputTxt.value != '' ){
@@ -57,7 +57,7 @@ function lnameValidation(inputTxt){
 
     if(inputTxt.value != '' ){
 
-        if(inputTxt.value.length >= 1){
+        if(inputTxt.value.length >= 2){
 
             if(inputTxt.value.match(regx)){
                 textField.textContent = '';

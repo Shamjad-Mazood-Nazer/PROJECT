@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User, AbstractUser
 
 # Create your models here.
 
@@ -46,6 +46,7 @@ class MCAStudentDetails(models.Model):
         ('female', 'female'),
     )
 
+    first_name = models.OneToOneField(StudentReg, null=False, on_delete=models.CASCADE)
     branch = models.CharField(max_length=50, choices=branch)
     DoB = models.DateTimeField(max_length=10)
     gender = models.CharField(max_length=6, choices=gender)
