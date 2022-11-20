@@ -46,7 +46,7 @@ class MCAStudentDetails(models.Model):
         ('female', 'female'),
     )
 
-    first_name = models.OneToOneField(StudentReg, null=False, on_delete=models.CASCADE)
+    admino = models.ForeignKey(StudentReg, null=True, blank=True, on_delete=models.CASCADE)
     branch = models.CharField(max_length=50, choices=branch)
     DoB = models.DateTimeField(max_length=10)
     gender = models.CharField(max_length=6, choices=gender)
@@ -90,7 +90,7 @@ class MCAStudentDetails(models.Model):
     languagesKnown = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.branch
+        return self.admino
 
 
 class BTechStudentDetails(models.Model):

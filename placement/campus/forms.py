@@ -27,7 +27,7 @@ class LoginForm(forms.ModelForm):
 class UpdateStudent(forms.ModelForm):
     class Meta:
         model = MCAStudentDetails
-        fields = ['branch','DoB','gender','mobileNoIndian','alternativeNo','personalMail','collegeMail','fatherName',
+        fields = ['admino','branch','DoB','gender','mobileNoIndian','alternativeNo','personalMail','collegeMail','fatherName',
                   'fatherNo','motherName','motherNo','fullAddress','pincode','nationality','planAfterGraduate','sslcPer','sslcYoP','sslcBoard',
                   'hsePer','hseYoP','hseBoard','nameOfUG','ugPer','ugCgpa','ugYoP','collegeNameUg','ugUniversity','entranceRank','mcaAggregateCgpa',
                   'activeArrears','historyOfArrears','examsNotAttended','pgUniversity','technicalSkills','certifications','internships','workExperience',

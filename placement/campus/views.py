@@ -34,7 +34,7 @@ def ajax_generate_code(request):
             ## Generate Code and save it in a session
             request.session['code'] = random.randint(111111, 999999)
             ## Send email Functionality
-            text_content = "Your Email Verification Code is " + str(request.session['code'])
+            text_content = "Your Email Verification Code for Placement-Cell Registration is " + str(request.session['code'])
             msg = EmailMultiAlternatives('Verify Email', text_content, EMAIL_HOST_USER, [email])
             msg.send()
     return HttpResponse("success")
@@ -82,7 +82,7 @@ def login(request):
         password = request.POST['password']
         if StudentReg.objects.filter(email=email, password=password).exists():
             user = StudentReg.objects.get(email=email)
-            request.session['user_id'] = user.admino  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
+            request.session['email'] = user.email  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             return redirect('student')
         return render(request, 'campus/login.html', {'form': form})
 
@@ -145,7 +145,16 @@ def studentDash(request):
 
 
 def updateStudentDetails(request):
-    return render(request, 'campus/studentForm.html')
+    form = MCAStudentDetails()
+    # is_private = request.POST.get('is_private', False)
+    success = None
+    if request.method == 'POST':
+        form = MCAStudentDetails(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            form.save()
+        success = "Updated Successfully !"
+    return render(request, 'campus/studentForm.html', {'form': form, 'success': success})
 
 
 def adminDash(request):
