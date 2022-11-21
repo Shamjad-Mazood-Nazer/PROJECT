@@ -17,7 +17,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import RegisterForm, LoginForm
-from .decorators import user_login_required
+from .decorators import user_login_required, admin_login_required
 import random
 from placement.settings import EMAIL_HOST_USER
 
@@ -94,30 +94,34 @@ def tpoLogin(request):
         password = request.POST['password']
         if Tpo.objects.filter(tpoMail=email, tpoPassword=password).exists():
             user = Tpo.objects.get(tpoMail=email)
-            request.session['user_id'] = user.tpoName  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
+            request.session['tpoMail'] = user.tpoMail  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             return redirect('adminDash')
         return render(request, 'campus/adminLogin.html', {'form': form})
 
 
-@user_login_required
+def get_admin(request):
+    return Tpo.objects.get(tpoMail=request.session['tpoMail'])
+
+
+@admin_login_required
 def adminDash(request):
-    user = get_user(request)
+    user = get_admin(request)
     return render(request, 'campus/adminDashboard.html', {'user': user})
 
 
 def tpoLogout(request):
-    if 'user_id' in request.session:
-        del request.session['user_id']  # delete user session
+    if 'email' in request.session:
+        del request.session['email']  # delete user session
     return redirect('tpo')
 
 
 def get_user(request):
     # request.session['admino']=13312
-    return StudentReg.objects.get(user_id=request.session['admino'])
+    return StudentReg.objects.get(email=request.session['email'])
 
 
 def home(request):
-    if 'user_id' in request.session:
+    if 'email' in request.session:
         user = get_user(request)
         return render(request, 'campus/studentDashboard.html', {'user': user})
     else:
@@ -125,14 +129,14 @@ def home(request):
 
 
 @user_login_required
-def studentDashboard(request):
+def studentDash(request):
     user = get_user(request)
     return render(request, 'campus/studentDashboard.html', {'user': user})
 
 
 def logout(request):
-    if 'user_id' in request.session:
-        del request.session['user_id']  # delete user session
+    if 'email' in request.session:
+        del request.session['email']  # delete user session
     return redirect('home')
 
 
@@ -140,8 +144,8 @@ def tpo(request):
     return render(request, 'campus/adminLogin.html')
 
 
-def studentDash(request):
-    return render(request, 'campus/studentDashboard.html')
+# def studentDash(request):
+#     return render(request, 'campus/studentDashboard.html')
 
 
 def updateStudentDetails(request):
@@ -157,8 +161,8 @@ def updateStudentDetails(request):
     return render(request, 'campus/studentForm.html', {'form': form, 'success': success})
 
 
-def adminDash(request):
-    return render(request, 'campus/adminDashboard.html')
+# def adminDash(request):
+#     return render(request, 'campus/adminDashboard.html')
 
 
 def index(request):

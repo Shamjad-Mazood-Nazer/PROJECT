@@ -22,8 +22,8 @@
 					<form method="post" action="login" class="login100-form validate-form">
 						{% csrf_token %}
 						<span class="login100-form-title">
-							<a class="txt3" href="http://127.0.0.1:8000/admin"></a> |
-							<a class="txt3" href="{% url 'tpo' %}">> Admin <</a> |
+							<a class="txt3" href="http://127.0.0.1:8000/admin">| Admin?</a> |
+<!--							<a class="txt3" href="{% url 'tpo' %}">> Admin <</a> |-->
 <!--							<a class="txt3" href="http://127.0.0.1:8000/hod">HOD</a> |-->
 <!--							<a class="txt3" href="http://127.0.0.1:8000/faculty">Faculty</a> |-->
 							<br><br>
@@ -58,7 +58,7 @@
 							<span class="txt1">
 								Forgot
 							</span>
-							<a class="txt2" href="">
+							<a class="txt2" href="{% url 'reset_password' %}">
 								Password?
 							</a>
 						</div>
