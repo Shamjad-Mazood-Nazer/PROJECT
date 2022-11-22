@@ -2,7 +2,11 @@ from hashlib import sha256
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import SetPasswordForm
+from django.contrib.sites import requests
+
 from .forms import SetPasswordForm
+
+from django.template import loader
 
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -174,3 +178,8 @@ def password_change(request):
     user = request.user
     form = SetPasswordForm(user)
     return render(request, 'password_reset_form.html', {'form': form})
+
+
+def viewDrive():
+    viewDrive = Drives.objects.all()
+    return render(requests, 'campus/viewDrive.html', {'viewDrive' : viewDrive})

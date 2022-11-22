@@ -48,7 +48,7 @@ class MCAStudentDetails(models.Model):
 
     admino = models.ForeignKey(StudentReg, null=True, blank=True, on_delete=models.CASCADE)
     branch = models.CharField(max_length=50, choices=branch)
-    DoB = models.DateTimeField(max_length=10)
+    DoB = models.DateField(max_length=10)
     gender = models.CharField(max_length=6, choices=gender)
     mobileNoIndian = models.CharField(max_length=10)
     alternativeNo = models.CharField(max_length=15)
@@ -109,7 +109,7 @@ class BTechStudentDetails(models.Model):
     )
 
     branch = models.CharField(max_length=50, choices=branch)
-    DoB = models.DateTimeField(max_length=10)
+    DoB = models.DateField(max_length=10)
     gender = models.CharField(max_length=6, choices=gender)
     mobileNoIndian = models.CharField(max_length=10)
     alternativeNo = models.CharField(max_length=15)
@@ -155,3 +155,36 @@ class Tpo(models.Model):
 
     def __str__(self):
         return self.tpoName;
+
+
+class Drives(models.Model):
+    drive_id = models.IntegerField(primary_key=True)
+    company_name = models.CharField(max_length=50)
+    salary_package = models.CharField(max_length=10)
+    description = models.CharField(max_length=255)
+    last_date = models.DateField()
+    status = models.BooleanField()
+
+    def __str__(self):
+        return self.company_name
+
+
+class ApplyDrive(models.Model):
+    apply_id = models.IntegerField(primary_key=True)
+    email = models.ForeignKey(StudentReg, null=True, blank=True, on_delete=models.CASCADE)
+    drive_id = models.ForeignKey(Drives, null=True, blank=True, on_delete=models.CASCADE)
+    applied_on = models.DateField()
+
+    def __str__(self):
+        return self.email
+
+
+class Placed(models.Model):
+    placed_id = models.IntegerField(primary_key=True)
+    email = models.ForeignKey(StudentReg, null=True, blank=True, on_delete=models.CASCADE)
+    drive_id = models.ForeignKey(ApplyDrive, null = True, blank = True, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return self.email
+
+
