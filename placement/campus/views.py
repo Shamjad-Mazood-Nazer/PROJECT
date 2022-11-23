@@ -3,6 +3,7 @@ from hashlib import sha256
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.sites import requests
+from django.core.cache import cache
 
 from .forms import SetPasswordForm
 
@@ -42,10 +43,6 @@ def ajax_generate_code(request):
             msg = EmailMultiAlternatives('Verify Email', text_content, EMAIL_HOST_USER, [email])
             msg.send()
     return HttpResponse("success")
-
-
-# def index(request):
-#     return render(request, 'campus/home.html')
 
 
 # def activateEmail(request, user, to_email):
@@ -145,7 +142,8 @@ def studentDash(request):
 
 def logout(request):
     if 'email' in request.session:
-        request.session.pop('email', None)  # delete user session
+        request.session.pop('email', None)
+        cache.clear()# delete user session
 
     return redirect('home')
 # def logout(request):
@@ -178,10 +176,6 @@ def updateStudentDetails(request):
 
 # def adminDash(request):
 #     return render(request, 'campus/adminDashboard.html')
-
-
-def index(request):
-    return render(request, 'campus/home.html')
 
 
 @login_required(login_url='login')

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% block content %}
 
 <html lang="en">
   <head>
@@ -70,14 +71,11 @@
             <a href="#"><strong><span class="fa fa-dashboard"></span> My Dashboard</strong></a>
             <hr>
             <table>
-                {% for s in students %}
-                    {{ s.first_name }}
-                    {{ s.branch }}
-                {% endfor %}
+                {{ data }}
             </table>
 
 
-
+{% endblock %}
         </div>
     </body>
 </html>
