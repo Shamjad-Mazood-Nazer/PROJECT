@@ -24,14 +24,14 @@ class LoginForm(forms.ModelForm):
         widgets = [passwordInputWidget]
 
 
-class UpdateStudent(forms.ModelForm):
-    class Meta:
-        model = MCAStudentDetails
-        fields = ['admino', 'branch','DoB','gender','mobileNoIndian','alternativeNo','collegeMail','fatherName',
-                  'fatherNo','motherName','motherNo','fullAddress','pincode','nationality','planAfterGraduate','sslcPer','sslcYoP','sslcBoard',
-                  'hsePer','hseYoP','hseBoard','nameOfUG','ugPer','ugCgpa','ugYoP','collegeNameUg','ugUniversity','entranceRank','mcaAggregateCgpa',
-                  'activeArrears','historyOfArrears','examsNotAttended','pgUniversity','technicalSkills','certifications','internships','workExperience',
-                  'projectGithub','linkedIn','achievement','languagesKnown']
+# class UpdateStudent(forms.ModelForm):
+#     class Meta:
+#         model = MCAStudentDetails
+#         fields = ['admino','branch','DoB','gender','mobileNoIndian','alternativeNo','personalMail','collegeMail','fatherName',
+#                   'fatherNo','motherName','motherNo','fullAddress','pincode','nationality','planAfterGraduate','sslcPer','sslcYoP','sslcBoard',
+#                   'hsePer','hseYoP','hseBoard','nameOfUG','ugPer','ugCgpa','ugYoP','collegeNameUg','ugUniversity','entranceRank','mcaAggregateCgpa',
+#                   'activeArrears','historyOfArrears','examsNotAttended','pgUniversity','technicalSkills','certifications','internships','workExperience',
+#                   'projectGithub','linkedIn','achievement','languagesKnown']
 
 
 class SetPasswordForm(SetPasswordForm):

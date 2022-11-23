@@ -23,40 +23,17 @@ class StudentReg(models.Model):
     email = models.EmailField(max_length=500, unique=True, default='youremail@gmail.com')
     password = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.first_name
-
-
-# class StudentReg(models.Model):
-#     admino = models.CharField(max_length=5, unique=True, default=None)
-#     email = models.EmailField(max_length=100, unique=True, null=True)
-#     password = models.CharField(max_length=30, null=True)
-#
-#     def __str__(self):
-#         return self.admino
-
-
-class MCAStudentDetails(models.Model):
-    branch = (
-        ('mca', 'MCA'),
-        ('intmca', 'INT MCA'),
-    )
-    gender = (
-        ('male', 'male'),
-        ('female', 'female'),
-    )
-
-    admino = models.ForeignKey(StudentReg, null=True, blank=True, on_delete=models.CASCADE)
-    branch = models.CharField(max_length=50, choices=branch)
+    branch = models.CharField(max_length=50)
     DoB = models.DateField(max_length=10)
-    gender = models.CharField(max_length=6, choices=gender)
-    mobileNoIndian = models.CharField(max_length=10)
-    alternativeNo = models.CharField(max_length=15)
-    collegeMail = models.CharField(max_length=200)
+    gender = models.CharField(max_length=6)
+    mobileNoIndian = models.CharField(unique=True, max_length=15)
+    alternativeNo = models.CharField(unique=True, max_length=15)
+    collegeMail = models.CharField(unique=True, max_length=200)
+
     fatherName = models.CharField(max_length=50)
-    fatherNo = models.CharField(max_length=15)
+    fatherNo = models.CharField(unique=True, max_length=15)
     motherName = models.CharField(max_length=30)
-    motherNo = models.CharField(max_length=15)
+    motherNo = models.CharField(unique=True, max_length=15)
     fullAddress = models.CharField(max_length=50)
     pincode = models.CharField(max_length=6)
     nationality = models.CharField(max_length=15)
@@ -73,7 +50,7 @@ class MCAStudentDetails(models.Model):
     ugYoP = models.CharField(max_length=4)
     collegeNameUg = models.CharField(max_length=50)
     ugUniversity = models.CharField(max_length=50)
-    entranceRank = models.CharField(max_length=6)
+    entranceRank = models.CharField(unique=True, max_length=6)
     mcaAggregateCgpa = models.CharField(max_length=4)
     activeArrears = models.CharField(max_length=2)
     historyOfArrears = models.CharField(max_length=2)
@@ -89,7 +66,72 @@ class MCAStudentDetails(models.Model):
     languagesKnown = models.CharField(max_length=500)
 
     def __str__(self):
-        return "%s" % self.admino
+        return self.first_name
+
+
+# class StudentReg(models.Model):
+#     admino = models.CharField(max_length=5, unique=True, default=None)
+#     email = models.EmailField(max_length=100, unique=True, null=True)
+#     password = models.CharField(max_length=30, null=True)
+#
+#     def __str__(self):
+#         return self.admino
+
+
+# class MCAStudentDetails(models.Model):
+#     branch = (
+#         ('mca', 'MCA'),
+#         ('intmca', 'INT MCA'),
+#     )
+#     gender = (
+#         ('male', 'male'),
+#         ('female', 'female'),
+#     )
+#
+#     admino = models.ForeignKey(StudentReg, null=True, blank=True, on_delete=models.CASCADE)
+#     branch = models.CharField(max_length=50, choices=branch)
+#     DoB = models.DateField(max_length=10)
+#     gender = models.CharField(max_length=6, choices=gender)
+#     mobileNoIndian = models.CharField(max_length=10)
+#     alternativeNo = models.CharField(max_length=15)
+#     collegeMail = models.CharField(max_length=200)
+#     fatherName = models.CharField(max_length=50)
+#     fatherNo = models.CharField(max_length=15)
+#     motherName = models.CharField(max_length=30)
+#     motherNo = models.CharField(max_length=15)
+#     fullAddress = models.CharField(max_length=50)
+#     pincode = models.CharField(max_length=6)
+#     nationality = models.CharField(max_length=15)
+#     planAfterGraduate = models.CharField(max_length=15)
+#     sslcPer = models.FloatField(max_length=5)
+#     sslcYoP = models.CharField(max_length=4)
+#     sslcBoard = models.CharField(max_length=35)
+#     hsePer = models.CharField(max_length=5)
+#     hseYoP = models.CharField(max_length=4)
+#     hseBoard = models.CharField(max_length=30)
+#     nameOfUG = models.CharField(max_length=10)
+#     ugPer = models.CharField(max_length=5)
+#     ugCgpa = models.CharField(max_length=5)
+#     ugYoP = models.CharField(max_length=4)
+#     collegeNameUg = models.CharField(max_length=50)
+#     ugUniversity = models.CharField(max_length=50)
+#     entranceRank = models.CharField(max_length=6)
+#     mcaAggregateCgpa = models.CharField(max_length=4)
+#     activeArrears = models.CharField(max_length=2)
+#     historyOfArrears = models.CharField(max_length=2)
+#     examsNotAttended = models.CharField(max_length=2)
+#     pgUniversity = models.CharField(max_length=50)
+#     technicalSkills = models.CharField(max_length=500)
+#     certifications = models.CharField(max_length=500)
+#     internships = models.CharField(max_length=500)
+#     workExperience = models.CharField(max_length=500)
+#     projectGithub = models.URLField(max_length=500)
+#     linkedIn = models.URLField(max_length=500)
+#     achievement = models.CharField(max_length=500)
+#     languagesKnown = models.CharField(max_length=500)
+#
+#     def __str__(self):
+#         return "%s" % self.admino
 
 
 class BTechStudentDetails(models.Model):
@@ -153,7 +195,7 @@ class Tpo(models.Model):
     tpoPassword = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.tpoName;
+        return self.tpoName
 
 
 class Drives(models.Model):

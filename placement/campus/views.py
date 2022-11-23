@@ -63,6 +63,30 @@ def register(request):
             error = "This email is already taken"
             return render(request, 'campus/register.html', {'form': form, 'error': error})
 
+        if StudentReg.objects.filter(mobileNoIndian=request.POST['phone1']).exists():
+            error = "This email is already taken"
+            return render(request, 'campus/register.html', {'form': form, 'error': error})
+
+        if StudentReg.objects.filter(alternativeNo=request.POST['phone2']).exists():
+            error = "This email is already taken"
+            return render(request, 'campus/register.html', {'form': form, 'error': error})
+
+        if StudentReg.objects.filter(collegeMail=request.POST['collegeemail']).exists():
+            error = "This email is already taken"
+            return render(request, 'campus/register.html', {'form': form, 'error': error})
+
+        if StudentReg.objects.filter(fatherNo=request.POST['fathernumber']).exists():
+            error = "This email is already taken"
+            return render(request, 'campus/register.html', {'form': form, 'error': error})
+
+        if StudentReg.objects.filter(motherNo=request.POST['mothernumber']).exists():
+            error = "This email is already taken"
+            return render(request, 'campus/register.html', {'form': form, 'error': error})
+
+        if StudentReg.objects.filter(entranceRank=request.POST['entrance_rank']).exists():
+            error = "This email is already taken"
+            return render(request, 'campus/register.html', {'form': form, 'error': error})
+
         ## Check Verification Code
         if (not 'code' in request.POST) or (not 'code' in request.session) or (
                 not request.POST['code'] == str(request.session['code'])):
@@ -142,18 +166,19 @@ def studentDash(request):
     return render(request, 'campus/studentDashboard.html', {'user': user, 'myData': myData})
 
 
-def logout(request):
-    if 'email' in request.session:
-        request.session.clear()  # delete user session
-    return redirect('login')
-
-
 # def logout(request):
-#     try:
-#         del request.session['email']
-#     except KeyError:
-#         pass
-#     return HttpResponse("You're logged out.")
+#     if 'email' in request.session:
+#         request.session.clear()  # delete user session
+#     return redirect('login')
+
+
+def logout(request):
+    try:
+        del request.session['email']
+        del request.session['password']
+    except KeyError:
+        pass
+    return render(request, "campus/login.html")
 
 def tpo(request):
     return render(request, 'campus/adminLogin.html')
@@ -163,17 +188,17 @@ def tpo(request):
 #     return render(request, 'campus/studentDashboard.html')
 
 # @user_login_required()
-def updateStudentDetails(request):
-    form = MCAStudentDetails()
-    # is_private = request.POST.get('is_private', False)
-    success = None
-    if request.method == 'POST':
-        form = MCAStudentDetails(request.POST)
-        if form.is_valid():
-            data = form.save()
-            form.save()
-        success = "Updated Successfully !"
-    return render(request, 'campus/studentForm.html', {'form': form, 'success': success})
+# def updateStudentDetails(request):
+#     form = MCAStudentDetails()
+#     # is_private = request.POST.get('is_private', False)
+#     success = None
+#     if request.method == 'POST':
+#         form = MCAStudentDetails(request.POST)
+#         if form.is_valid():
+#             data = form.save()
+#             form.save()
+#         success = "Updated Successfully !"
+#     return render(request, 'campus/studentForm.html', {'form': form, 'success': success})
 
 
 # def adminDash(request):
