@@ -5,5 +5,5 @@ from .models import *
 admin.site.register(StudentReg)
 admin.site.register(Tpo)
 admin.site.register(BTechStudentDetails)
-# admin.site.register(MCAStudentDetails)
+admin.site.register(MCAStudentDetails)
 admin.site.register(Drives)
