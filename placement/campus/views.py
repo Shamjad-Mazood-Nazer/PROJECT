@@ -21,7 +21,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import RegisterForm, LoginForm
-from .decorators import user_login_required, admin_login_required
+from .decorators import user_login_required
 import random
 from placement.settings import EMAIL_HOST_USER
 
@@ -75,7 +75,7 @@ def register(request):
         form = RegisterForm(request.POST)
         new_user = form.save(commit=False)
         new_user.save()
-        success = "New User Created Successfully !"
+        success = "New User Created Successfully, You may go back and try to login !"
     return render(request, 'campus/register.html', {'form': form, 'success': success})
 
 
@@ -89,6 +89,8 @@ def login(request):
             request.session['email'] = user.email  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             return redirect('student')
         return render(request, 'campus/login.html', {'form': form})
+    else:
+        return render(request, 'campus/login.html', {'form': form})
 
 
 def tpoLogin(request):
@@ -101,13 +103,15 @@ def tpoLogin(request):
             request.session['tpoMail'] = user.tpoMail  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             return redirect('adminDash')
         return render(request, 'campus/adminLogin.html', {'form': form})
+    else:
+        return render(request, 'campus/adminLogin.html', {'form': form})
 
 
 def get_admin(request):
     return Tpo.objects.get(tpoMail=request.session['tpoMail'])
 
 
-@admin_login_required
+@login_required(login_url='tpoLogin')
 def adminDash(request):
     user = get_admin(request)
     return render(request, 'campus/adminDashboard.html', {'user': user})
@@ -135,14 +139,21 @@ def home(request):
 @user_login_required
 def studentDash(request):
     user = get_user(request)
-    return render(request, 'campus/studentDashboard.html', {'user': user})
+    myData = StudentReg.objects.all()
+    return render(request, 'campus/studentDashboard.html', {'user': user, 'myData':myData})
 
 
 def logout(request):
     if 'email' in request.session:
-        del request.session['email']  # delete user session
-    return redirect('home')
+        request.session.pop('email', None)  # delete user session
 
+    return redirect('home')
+# def logout(request):
+#     try:
+#         del request.session['email']
+#     except KeyError:
+#         pass
+#     return HttpResponse("You're logged out.")
 
 def tpo(request):
     return render(request, 'campus/adminLogin.html')
@@ -151,7 +162,7 @@ def tpo(request):
 # def studentDash(request):
 #     return render(request, 'campus/studentDashboard.html')
 
-
+@login_required(login_url='login')
 def updateStudentDetails(request):
     form = MCAStudentDetails()
     # is_private = request.POST.get('is_private', False)
@@ -173,13 +184,13 @@ def index(request):
     return render(request, 'campus/home.html')
 
 
-@login_required
+@login_required(login_url='login')
 def password_change(request):
     user = request.user
     form = SetPasswordForm(user)
     return render(request, 'password_reset_form.html', {'form': form})
 
 
-def viewDrive():
+def viewDrive(response):
     viewDrive = Drives.objects.all()
-    return render(requests, 'campus/viewDrive.html', {'viewDrive' : viewDrive})
+    return render(response, 'campus/viewDrive.html', {'viewDrive' : viewDrive})

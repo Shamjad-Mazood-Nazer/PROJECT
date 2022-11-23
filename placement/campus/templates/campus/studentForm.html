@@ -64,14 +64,14 @@
                         <label>Gender:<font color="red">*</font></label>
                         <input type="radio" id="Male" value="M" name="user_gender" required autocomplete="off"><label for="Male" class="light">Male</label>
                         <input type="radio" id="Female" value="F" name="user_gender"><label for="Female" class="light">Female</label>
-<span id="gender" class="new"></span>
+<br><span id="gender" class="new"></span>
                         <br><br>
                         <label for="phone1">Phone No:<font color="red">*</font></label>
                         <input type="number" id="phone1" name="phone1" maxlength="10" onkeypress="phone1Validation(this)" placeholder="Your Personal Number" required autocomplete="off">
-<span id="ph1" class="new"></span>
+<br><span id="ph1" class="new"></span>
                         <label for="phone2">Alternative No:<font color="red">*</font></label>
                         <input type="number" id="phone2" name="phone2" maxlength="10" onkeypress="phone2Validation(this)" placeholder="Alternative Number" required autocomplete="off">
-<span id="ph2" class="new"></span>
+<br><span id="ph2" class="new"></span>
 <br><span id="mail" class="new"></span>
                         <label for="collegeemail">College Email:<font color="red">*</font></label>
                         <input type="email" id="collegeemail" name="collegeemail" onkeypress="emailValidation(this)" placeholder="College Mail" required autocomplete="off">
@@ -123,8 +123,8 @@
                         </legend>
 <div class="scroll">
                         <label for="persslc">SSLC %:<font color="red">*</font></label>
-                        <input type="number" id="persslc" name="sslcPer" maxlength="3" required autocomplete="off">
-
+                        <input type="number" id="persslc" name="sslcPer" maxlength="3" onkeypress="sslcPerValidation(this)" required autocomplete="off">
+<br><span id="sslcper" class="new"></span>
                         <label for="sslcYoP">SSLC Year of Pass:<font color="red">*</font></label>
                         <input type="number" id="sslcYoP" name="sslcYoP" maxlength="4" required autocomplete="off">
 

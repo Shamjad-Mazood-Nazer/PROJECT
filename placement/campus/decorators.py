@@ -10,11 +10,3 @@ def user_login_required(function):
             return function(request, *args, **kwargs)
     return wrapper
 
-
-def admin_login_required(function):
-    def wrapper(request, login_url='tpoLogin', *args, **kwargs):
-        if not 'email' in request.session:
-            return redirect(login_url)
-        else:
-            return function(request, *args, **kwargs)
-    return wrapper

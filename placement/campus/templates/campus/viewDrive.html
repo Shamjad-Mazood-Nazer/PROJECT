@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 {% load static %}
-
+{% block content %}
 <html lang="en">
   <head>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <!------ Include the above in your HEAD tag ---------->
-    <title>Welcome Back!</title>
+    <title>Drives</title>
     <link rel="stylesheet" href="{% static '/css/studentDashStyle.css' %}">
-      <script src="{% static '/js/logoutScript.js' %}"></script>
+<!--      <script src="{% static '/js/logoutScript.js' %}"></script>-->
   </head>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <body>
@@ -68,15 +68,15 @@
 
             <a href="#"><strong><span class="fa fa-dashboard"></span> My Dashboard</strong></a>
             <hr>
-            <table>{{ viewDrive }}
-                {% for view in viewDrive %}
+            <table>{{ showDrives }}
+                {% for view in showDrives %}
                     {{ view.id }}
                     {{ view.company_name }}
                 {% endfor %}
             </table>
 
 
-
+{% endblock %}
         </div>
     </body>
 </html>

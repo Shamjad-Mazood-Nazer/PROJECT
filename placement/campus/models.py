@@ -52,7 +52,6 @@ class MCAStudentDetails(models.Model):
     gender = models.CharField(max_length=6, choices=gender)
     mobileNoIndian = models.CharField(max_length=10)
     alternativeNo = models.CharField(max_length=15)
-    personalMail = models.CharField(max_length=200)
     collegeMail = models.CharField(max_length=200)
     fatherName = models.CharField(max_length=50)
     fatherNo = models.CharField(max_length=15)
@@ -84,13 +83,13 @@ class MCAStudentDetails(models.Model):
     certifications = models.CharField(max_length=500)
     internships = models.CharField(max_length=500)
     workExperience = models.CharField(max_length=500)
-    projectGithub = models.CharField(max_length=500)
-    linkedIn = models.CharField(max_length=500)
+    projectGithub = models.URLField(max_length=500)
+    linkedIn = models.URLField(max_length=500)
     achievement = models.CharField(max_length=500)
     languagesKnown = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.admino
+        return "%s" % self.admino
 
 
 class BTechStudentDetails(models.Model):
@@ -108,12 +107,12 @@ class BTechStudentDetails(models.Model):
         ('female', 'female'),
     )
 
+    admino = models.ForeignKey(StudentReg, null=True, blank=True, on_delete=models.CASCADE)
     branch = models.CharField(max_length=50, choices=branch)
     DoB = models.DateField(max_length=10)
     gender = models.CharField(max_length=6, choices=gender)
     mobileNoIndian = models.CharField(max_length=10)
     alternativeNo = models.CharField(max_length=15)
-    personalMail = models.CharField(max_length=200)
     collegeMail = models.CharField(max_length=200)
     fatherName = models.CharField(max_length=50)
     motherName = models.CharField(max_length=30)
@@ -139,13 +138,13 @@ class BTechStudentDetails(models.Model):
     certifications = models.CharField(max_length=500)
     internships = models.CharField(max_length=500)
     workExperience = models.CharField(max_length=500)
-    projectGithub = models.CharField(max_length=500)
-    linkedIn = models.CharField(max_length=500)
+    projectGithub = models.URLField(max_length=500)
+    linkedIn = models.URLField(max_length=500)
     achievement = models.CharField(max_length=500)
     languagesKnown = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.branch
+        return "%s" % self.admino
 
 
 class Tpo(models.Model):
@@ -161,7 +160,7 @@ class Drives(models.Model):
     drive_id = models.IntegerField(primary_key=True)
     company_name = models.CharField(max_length=50)
     salary_package = models.CharField(max_length=10)
-    description = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
     last_date = models.DateField()
     status = models.BooleanField()
 

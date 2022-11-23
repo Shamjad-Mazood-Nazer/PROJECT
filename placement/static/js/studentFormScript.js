@@ -172,6 +172,63 @@ function fatherPhoneValidation(inputTxt){
     }
 }
 
+function phone1Validation(inputTxt){
+
+    var regx = /^[6-9][0-9]{10}$/;
+    var textField = document.getElementById("ph1");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid phone number';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function phone2Validation(inputTxt){
+
+    var regx = /^[6-9][0-9]{10}$/;
+    var textField = document.getElementById("ph2");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid phone number';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function sslcPerValidation(inputTxt){
+
+    var regx = /\b(?<!\.)(?!0+(?:\.0+)?%)(?:\d|[1-9]\d|100)(?:(?<!100)\.\d+)?%;
+    var textField = document.getElementById("sslcper");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid %';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
 function motherPhoneValidation(inputTxt){
 
     var regx = /^[6-9][0-9]{10}$/;
