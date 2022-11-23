@@ -3,9 +3,8 @@ from hashlib import sha256
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.sites import requests
-from django.core.cache import cache
 
-from .forms import SetPasswordForm
+from .forms import *
 
 from django.template import loader
 
@@ -39,7 +38,8 @@ def ajax_generate_code(request):
             ## Generate Code and save it in a session
             request.session['code'] = random.randint(111111, 999999)
             ## Send email Functionality
-            text_content = "Your Email Verification Code for Placement-Cell Registration is " + str(request.session['code'])
+            text_content = "Your Email Verification Code for Placement-Cell Registration is " + str(
+                request.session['code'])
             msg = EmailMultiAlternatives('Verify Email', text_content, EMAIL_HOST_USER, [email])
             msg.send()
     return HttpResponse("success")
@@ -65,7 +65,7 @@ def register(request):
 
         ## Check Verification Code
         if (not 'code' in request.POST) or (not 'code' in request.session) or (
-        not request.POST['code'] == str(request.session['code'])):
+                not request.POST['code'] == str(request.session['code'])):
             error = "Invalid Verification Code"
             return render(request, 'campus/register.html', {'form': form, 'error': error})
             ## Safe to go
@@ -83,7 +83,8 @@ def login(request):
         password = request.POST['password']
         if StudentReg.objects.filter(email=email, password=password).exists():
             user = StudentReg.objects.get(email=email)
-            request.session['email'] = user.email  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
+            request.session[
+                'email'] = user.email  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             return redirect('student')
         return render(request, 'campus/login.html', {'form': form})
     else:
@@ -97,7 +98,8 @@ def tpoLogin(request):
         password = request.POST['password']
         if Tpo.objects.filter(tpoMail=email, tpoPassword=password).exists():
             user = Tpo.objects.get(tpoMail=email)
-            request.session['tpoMail'] = user.tpoMail  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
+            request.session[
+                'tpoMail'] = user.tpoMail  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             return redirect('adminDash')
         return render(request, 'campus/adminLogin.html', {'form': form})
     else:
@@ -137,15 +139,15 @@ def home(request):
 def studentDash(request):
     user = get_user(request)
     myData = StudentReg.objects.all()
-    return render(request, 'campus/studentDashboard.html', {'user': user, 'myData':myData})
+    return render(request, 'campus/studentDashboard.html', {'user': user, 'myData': myData})
 
 
 def logout(request):
     if 'email' in request.session:
-        request.session.pop('email', None)
-        cache.clear()# delete user session
+        request.session.clear()  # delete user session
+    return redirect('login')
 
-    return redirect('home')
+
 # def logout(request):
 #     try:
 #         del request.session['email']
@@ -160,7 +162,7 @@ def tpo(request):
 # def studentDash(request):
 #     return render(request, 'campus/studentDashboard.html')
 
-@login_required(login_url='login')
+# @user_login_required()
 def updateStudentDetails(request):
     form = MCAStudentDetails()
     # is_private = request.POST.get('is_private', False)
@@ -168,7 +170,7 @@ def updateStudentDetails(request):
     if request.method == 'POST':
         form = MCAStudentDetails(request.POST)
         if form.is_valid():
-            data = form.save(commit=False)
+            data = form.save()
             form.save()
         success = "Updated Successfully !"
     return render(request, 'campus/studentForm.html', {'form': form, 'success': success})
@@ -187,4 +189,4 @@ def password_change(request):
 
 def viewDrive(response):
     viewDrive = Drives.objects.all()
-    return render(response, 'campus/viewDrive.html', {'viewDrive' : viewDrive})
+    return render(response, 'campus/viewDrive.html', {'viewDrive': viewDrive})

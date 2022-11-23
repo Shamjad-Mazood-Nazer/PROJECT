@@ -59,7 +59,7 @@
                         </select>
 
                         <label for="DoB">Date of Birth:<font color="red">*</font> </label>
-                        <input type="date" id="DoB" name="user_DoB" required autocomplete="off">
+                        <input type="date" id="DoB" name="user_DoB" max="2004-12-31" required autocomplete="off">
 <br><span id="birth" class="new"></span>
                         <label>Gender:<font color="red">*</font></label>
                         <input type="radio" id="Male" value="M" name="user_gender" required autocomplete="off"><label for="Male" class="light">Male</label>
@@ -123,19 +123,19 @@
                         </legend>
 <div class="scroll">
                         <label for="persslc">SSLC %:<font color="red">*</font></label>
-                        <input type="number" id="persslc" name="sslcPer" maxlength="3" onkeypress="sslcPerValidation(this)" required autocomplete="off">
+                        <input type="number" id="persslc" name="sslcPer" min="0" max="100" required autocomplete="off">
 <br><span id="sslcper" class="new"></span>
                         <label for="sslcYoP">SSLC Year of Pass:<font color="red">*</font></label>
-                        <input type="number" id="sslcYoP" name="sslcYoP" maxlength="4" required autocomplete="off">
+                        <input type="number" id="sslcYoP" name="sslcYoP" min="2010" max="2018" required autocomplete="off">
 
                         <label for="sslcBoard">SSLC Board:<font color="red">*</font></label>
                         <input type="text" id="sslcBoard" name="sslcBoard" required autocomplete="off">
 
                         <label for="perHSE">HSE %:<font color="red">*</font></label>
-                        <input type="number" id="perHSE" name="HSEPer" maxlength="3" required autocomplete="off">
+                        <input type="number" id="perHSE" name="HSEPer" min="0" max="100" required autocomplete="off">
 
                         <label for="HSEYoP">HSE Year of Pass:<font color="red">*</font></label>
-                        <input type="number" id="HSEYoP" name="HSEYoP" maxlength="4" required autocomplete="off">
+                        <input type="number" id="HSEYoP" name="HSEYoP" min="2010" max="2020" required autocomplete="off">
 
                         <label for="HSEBoard">HSE Board:<font color="red">*</font></label>
                         <input type="text" id="HSEBoard" name="HSEBoard" required autocomplete="off">
@@ -144,13 +144,13 @@
                         <input type="text" id="UG" name="UG_course" required autocomplete="off">
 
                         <label for="perUG">UG %:<font color="red">*</font></label>
-                        <input type="number" id="perUG" name="UG_Per" maxlength="3" required autocomplete="off">
+                        <input type="number" id="perUG" name="UG_Per" min="0" max="100" required autocomplete="off">
 
                         <label for="UGYoP">UG Year of Pass:<font color="red">*</font></label>
-                        <input type="number" id="UGYoP" name="UG_YoP" maxlength="4" required autocomplete="off">
+                        <input type="number" id="UGYoP" name="UG_YoP" min="2010" max="2022" required autocomplete="off">
 
                         <label for="UG_CGPA">UG CGPA:<font color="red">*</font></label>
-                        <input type="text" id="UG_CGPA" name="UG_CGPA" onkeypress="cgpaValidation(this)" placeholder="eg: 4.00 / 8.32" required autocomplete="off">
+                        <input type="text" id="UG_CGPA" name="UG_CGPA" min="0" max="10" onkeypress="cgpaValidation(this)" placeholder="eg: 4.00 / 8.32" required autocomplete="off">
                         <br><span id="cgpa" class="new"></span><br><br>
 
                         <label for="UGCollege">Name of the college:<font color="red">*</font></label>
@@ -160,42 +160,16 @@
                         <input type="text" id="UGUniversity" name="UG_UNIVERSIY" required autocomplete="off">
 
                         <label for="entranceRank">Entrance Rank:<font color="red">*</font></label>
-                        <input type="number" id="entranceRank" name="entrance_rank" maxlength="6" required autocomplete="off">
+                        <input type="number" id="entranceRank" name="entrance_rank" min="1" max="6000" required autocomplete="off">
 
                         <label for="arrears">Active Arrears:<font color="red">*</font></label>
-                        <input type="number" id="arrears" maxlength="2" name="active_arrears" required autocomplete="off">
+                        <input type="number" id="arrears" min="0" max="15" name="active_arrears" required autocomplete="off">
 
                         <label for="university">University:<font color="red">*</font></label>
                         <input type="text" id="university" name="university" required autocomplete="off">
 
                         <label for="exam_not">Exams not attended:<font color="red">*</font></label>
-                        <input type="number" id="exam_not" name="exam_not_attended" maxlength="2" required autocomplete="off">
-
-                        <!--         <label for="job">Job Role:</label>-->
-                        <!--          <select id="job" name="user_job">-->
-                        <!--            <optgroup label="Web">-->
-                        <!--              <option value="frontend_developer">Front-End Developer</option>-->
-                        <!--              <option value="php_developer">PHP Developer</option>-->
-                        <!--              <option value="python_developer">Python Developer</option>-->
-                        <!--              <option value="rails_developer">Rails Developer</option>-->
-                        <!--              <option value="web_designer">Web Designer</option>-->
-                        <!--              <option value="wordpress_developer">Wordpress Developer</option>-->
-                        <!--            </optgroup>-->
-                        <!--            <optgroup label="Mobile">-->
-                        <!--              <option value="android_developer">Android Developer</option>-->
-                        <!--              <option value="ios_developer">IOS Developer</option>-->
-                        <!--              <option value="mobile_designer">Mobile Designer</option>-->
-                        <!--            </optgroup>-->
-                        <!--            <optgroup label="Business">-->
-                        <!--              <option value="business_owner">Business Owner</option>-->
-                        <!--              <option value="freelancer">Freelancer</option>-->
-                        <!--            </optgroup>-->
-                        <!--          </select>-->
-
-                        <!--          <label>Interests:</label>-->
-                        <!--          <input type="checkbox" id="development" value="interest_development" name="user_interest"><label class="light" for="development">Development</label><br>-->
-                        <!--          <input type="checkbox" id="design" value="interest_design" name="user_interest"><label class="light" for="design">Design</label><br>-->
-                        <!--          <input type="checkbox" id="business" value="interest_business" name="user_interest"><label class="light" for="business">Business</label>-->
+                        <input type="number" id="exam_not" name="exam_not_attended" min="0" max="15" required autocomplete="off">
 </div>
                     </fieldset>
 
@@ -229,8 +203,6 @@
                         <label for="linkedin">LinkedIn Account Link:</label>
                         <input type="text" id="linkedin" name="linkedin" required autocomplete="off">
 
-
-<!--                        <button type="reset">Cancel</button>-->
 </div>
                             <button class="button button" type="submit">Update My Details</button>
                     </fieldset>
