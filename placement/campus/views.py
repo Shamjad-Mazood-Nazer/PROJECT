@@ -205,7 +205,8 @@ class applyDrive(View):
     def get(self, request, drive_id):
         sid = request.session.get('email')
         print(sid)
-        add = ApplyDrive(email=sid)
+        job = ApplyDrive.objects.get(id=drive_id)
+        add = ApplyDrive(email=sid, job_id=job)
         add.save()
 
         return HttpResponse("<script>alert('Applied Successful!');window.location='/viewDrive';</script>")

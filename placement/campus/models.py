@@ -170,9 +170,10 @@ class Drives(models.Model):
 
 class ApplyDrive(models.Model):
     email = models.EmailField(max_length=100)
-    job_id = models.ForeignKey(Drives, null=True, blank=True, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=50)
+    job_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.email
+        return self.full_name
 
 
