@@ -195,4 +195,4 @@ def viewDrive(request):
 
 
 def applyDrive(request):
-    check =
+    check = Drives.objects.filter(status)
