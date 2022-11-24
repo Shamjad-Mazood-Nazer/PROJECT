@@ -210,3 +210,7 @@ class applyDrive(View):
         add.save()
 
         return HttpResponse("<script>alert('Applied Successful!');window.location='/viewDrive';</script>")
+
+
+def registerDrive(request):
+    return render(request, 'student')

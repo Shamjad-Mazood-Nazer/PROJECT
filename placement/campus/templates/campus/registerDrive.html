@@ -6,9 +6,14 @@
     <title>Enter Details</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static '/css/studentDashStyle.css' %}">
+    <script src="{% static '/js/registerScript.js' %}"></script>
 
 </head>
 <body>
-
+    <div class="container">
+        <label for="mail"></label>
+        <input id="mail" type="email" name="email" placeholder="email" required autocomplete="off">
+        <span id="email" class="new"></span>
+    </div>
 </body>
 </html>
