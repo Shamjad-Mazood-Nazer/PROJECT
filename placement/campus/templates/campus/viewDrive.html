@@ -27,7 +27,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-                                <i class="fa fa-user-circle"></i> Hi, {{user.first_name}} !
+                                <i class="fa fa-user-circle"></i> Hi, {{myData.first_name}} !
                                 <span class="caret"></span>
                             </a>
                             <ul id="g-account-menu" class="dropdown-menu" role="menu">
@@ -59,32 +59,42 @@
                 <li><a href="{% url 'updateStudentDetails' %}"><i class="fa fa-database"></i> Update Details</a></li>
                 <li><a href="#"><i class="fa fa-history"></i> My history / Drives</a></li>
                 <li><a href="#"><i class="fa fa-lock"></i> Change Password</a></li>
-                <li><a href="#"><i class="fa fa-money"></i> One Time Payment</a></li>
+<!--                <li><a href="#"><i class="fa fa-money"></i> One Time Payment</a></li>-->
 
             </ul>
         </div><!-- /span-3 -->
         <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
             <!-- Right -->
 
-            <a href="#"><strong><span class="fa fa-dashboard"></span> My Dashboard</strong></a>
+            <a href="{% url 'student' %}"><strong><span class="fa fa-dashboard"></span> My Dashboard</strong></a>
             <hr>
+            <marquee>
+                <h3 align="center" style="color: red;">Latest Update on Drives</h3>
+            </marquee>
+
             <table>
                 <tr>
+                    <th>Sl. No</th>
                     <th>Company Name</th>
                     <th>Salary Package(LPA)</th>
                     <th>Description</th>
                     <th>Due Date</th>
                     <th>Status</th>
-                    <th>Status</th>
+                    <th>Pick</th>
                 </tr>
                 {% for view in viewDrive %}
                     <tr>
+                        <td>{{view.drive_id}}</td>
                         <td> {{ view.company_name }} </td>
                         <td> {{ view.salary_package }} </td>
                         <td> {{ view.description }} </td>
                         <td> {{ view.last_date }} </td>
                         <td> {{ view.status }} </td>
-                        <td><button class="btn btn-primary" href="{% url 'applyDrive' %}" type="submit">Apply</button></td>
+                        <td>
+                            <a href="{% url 'applyDrive' view.drive_id %}">
+                                <button class="btn btn-primary">Apply</button>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
 

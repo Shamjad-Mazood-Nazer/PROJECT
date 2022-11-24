@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from .views import applyDrive
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -17,7 +18,7 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
 
     path('viewDrive', views.viewDrive, name='viewDrive'),
-    path('applyDrive', views.applyDrive, name='applyDrive'),
+    path('applyDrive/<drive_id>/', applyDrive.as_view(), name='applyDrive'),
 
     path('ajax_generate_code/', views.ajax_generate_code, name='ajax_generate_code'),
 

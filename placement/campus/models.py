@@ -169,19 +169,8 @@ class Drives(models.Model):
 
 
 class ApplyDrive(models.Model):
-    apply_id = models.IntegerField(primary_key=True)
-    email = models.ForeignKey(StudentReg, null=True, blank=True, on_delete=models.CASCADE)
-    drive = models.ForeignKey(Drives, null=True, blank=True, on_delete=models.CASCADE)
-    applied_on = models.DateField()
-
-    def __str__(self):
-        return self.email
-
-
-class Placed(models.Model):
-    placed_id = models.IntegerField(primary_key=True)
-    email = models.ForeignKey(StudentReg, null=True, blank=True, on_delete=models.CASCADE)
-    drive_id = models.ForeignKey(ApplyDrive, null = True, blank = True, on_delete = models.CASCADE)
+    email = models.EmailField(max_length=100)
+    job_id = models.ForeignKey(Drives, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.email

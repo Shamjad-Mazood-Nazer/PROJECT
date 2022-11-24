@@ -82,10 +82,15 @@ def login(request):
         email = request.POST['email']
         password = request.POST['password']
         if StudentReg.objects.filter(email=email, password=password).exists():
-            user = StudentReg.objects.get(email=email)
-            request.session[
-                'email'] = user.email  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
-            return redirect('student')
+            user = StudentReg.objects.filter(email=email)
+            for std in user:
+                email = std.email
+                id = std.admino
+                print(email)
+                request.session['email'] = std.email
+                # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
+                request.session['admino'] = std.admino
+                return redirect('student')
         return render(request, 'campus/login.html', {'form': form})
     else:
         return render(request, 'campus/login.html', {'form': form})
@@ -139,7 +144,7 @@ def home(request):
 def studentDash(request):
     user = get_user(request)
     myData = StudentReg.objects.filter(admino=user.admino)
-    print(myData)
+    # print(myData)
     return render(request, 'campus/studentDashboard.html', {'user': user, 'myData': myData})
 
 
@@ -152,10 +157,10 @@ def studentDash(request):
 def logout(request):
     try:
         del request.session['email']
-        del request.session['password']
     except KeyError:
         pass
     return render(request, "campus/login.html")
+
 
 def tpo(request):
     return render(request, 'campus/adminLogin.html')
@@ -190,9 +195,17 @@ def password_change(request):
 
 
 def viewDrive(request):
+    user = get_user(request)
     viewDrive = Drives.objects.all()
-    return render(request, 'campus/viewDrive.html', {'viewDrive': viewDrive})
+    myData = StudentReg.objects.get(email=user.email)
+    return render(request, 'campus/viewDrive.html', {'myData': myData, 'viewDrive': viewDrive})
 
 
-def applyDrive(request):
-    check = Drives.objects.filter(status)
+class applyDrive(View):
+    def get(self, request, drive_id):
+        sid = request.session.get('email')
+        print(sid)
+        add = ApplyDrive(email=sid)
+        add.save()
+
+        return HttpResponse("<script>alert('Applied Successful!');window.location='/viewDrive';</script>")
