@@ -3,7 +3,7 @@ from hashlib import sha256
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.sites import requests
-
+from django.views import View
 from .forms import *
 
 from django.template import loader
@@ -138,7 +138,8 @@ def home(request):
 @user_login_required
 def studentDash(request):
     user = get_user(request)
-    myData = StudentReg.objects.all()
+    myData = StudentReg.objects.filter(admino=user.admino)
+    print(myData)
     return render(request, 'campus/studentDashboard.html', {'user': user, 'myData': myData})
 
 
@@ -188,6 +189,10 @@ def password_change(request):
     return render(request, 'password_reset_form.html', {'form': form})
 
 
-def viewDrive(response):
+def viewDrive(request):
     viewDrive = Drives.objects.all()
-    return render(response, 'campus/viewDrive.html', {'viewDrive': viewDrive})
+    return render(request, 'campus/viewDrive.html', {'viewDrive': viewDrive})
+
+
+def applyDrive(request):
+    check =

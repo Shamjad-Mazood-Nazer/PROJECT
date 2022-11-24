@@ -70,12 +70,54 @@
 
             <a href="#"><strong><span class="fa fa-dashboard"></span> My Dashboard</strong></a>
             <hr>
-            <table>
-                {{ data }}
-            </table>
+            <div class="container p-3 my-3 bg-dark text-white">
+                <table>
+                    <tr>
+                        <th>Your Admission Number : </th>
+                        <td>{{user.admino}}</td>
+                    </tr>
+                    <tr>
+                        <th>Your First Name : </th>
+                        <td>{{user.first_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Your Last Name : </th>
+                        <td>{{user.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Your Email Address : </th>
+                        <td>{{user.email}}</td>
+                    </tr>
 
+<!--                    {% for data in myData %}-->
+<!--                    <tr>-->
+<!--                        <td>Admission Number :{{ data.admino }}</td>-->
+<!--                        <td>First Name :{{ data.first_name }}</td>-->
+<!--                        <td>Last Name :{{ data.last_name }}</td>-->
+<!--                        <td>Email ID :{{ data.email }}</td>-->
+<!--                    </tr>-->
+<!--                    {% endfor %}-->
+                </table>
+            </div>
 
 {% endblock %}
         </div>
     </body>
 </html>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        font-size: 35px;
+        text-align: auto;
+        padding: 15px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>

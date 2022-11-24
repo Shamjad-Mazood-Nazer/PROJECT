@@ -55,7 +55,7 @@
 
             <ul class="nav nav-pills nav-stacked" style="border-right:1px solid black">
                 <!--<li class="nav-header"></li>-->
-                <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{% url 'student' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                 <li><a href="{% url 'updateStudentDetails' %}"><i class="fa fa-database"></i> Update Details</a></li>
                 <li><a href="#"><i class="fa fa-history"></i> My history / Drives</a></li>
                 <li><a href="#"><i class="fa fa-lock"></i> Change Password</a></li>
@@ -68,11 +68,26 @@
 
             <a href="#"><strong><span class="fa fa-dashboard"></span> My Dashboard</strong></a>
             <hr>
-            <table>{{ showDrives }}
-                {% for view in showDrives %}
-                    {{ view.id }}
-                    {{ view.company_name }}
+            <table>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Salary Package(LPA)</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Status</th>
+                </tr>
+                {% for view in viewDrive %}
+                    <tr>
+                        <td> {{ view.company_name }} </td>
+                        <td> {{ view.salary_package }} </td>
+                        <td> {{ view.description }} </td>
+                        <td> {{ view.last_date }} </td>
+                        <td> {{ view.status }} </td>
+                        <td><button class="btn btn-primary" href="{% url 'applyDrive' %}" type="submit">Apply</button></td>
+                    </tr>
                 {% endfor %}
+
             </table>
 
 
@@ -80,3 +95,24 @@
         </div>
     </body>
 </html>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: justify;
+        padding: 18px;
+    }
+
+    tr:nth-child(even){
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #6d64b5;
+        color: white;
+    }
+</style>

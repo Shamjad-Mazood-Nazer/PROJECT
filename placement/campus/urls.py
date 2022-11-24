@@ -13,9 +13,11 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('register', views.register, name='register'),
     path('studentDash', views.studentDash, name='student'),
-    path('viewDrive', views.viewDrive, name='viewDrive'),
     path('updateStudentDetails', views.updateStudentDetails, name='updateStudentDetails'),
     path('logout', views.logout, name='logout'),
+
+    path('viewDrive', views.viewDrive, name='viewDrive'),
+    path('applyDrive', views.applyDrive, name='applyDrive'),
 
     path('ajax_generate_code/', views.ajax_generate_code, name='ajax_generate_code'),
 

@@ -20,7 +20,7 @@ class StudentReg(models.Model):
     admino = models.CharField(unique=True, max_length=255)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=500, unique=True, default='youremail@gmail.com')
+    email = models.EmailField(max_length=500, unique=True)
     password = models.CharField(max_length=255)
 
     def __str__(self):
