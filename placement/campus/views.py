@@ -103,8 +103,8 @@ def tpoLogin(request):
         password = request.POST['password']
         if Tpo.objects.filter(tpoMail=email, tpoPassword=password).exists():
             user = Tpo.objects.get(tpoMail=email)
-            request.session[
-                'tpoMail'] = user.tpoMail  # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
+            request.session['tpoMail'] = user.tpoMail
+            # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             return redirect('adminDash')
         return render(request, 'campus/adminLogin.html', {'form': form})
     else:
@@ -193,7 +193,7 @@ def password_change(request):
     form = SetPasswordForm(user)
     return render(request, 'password_reset_form.html', {'form': form})
 
-
+@user_login_required
 def viewDrive(request):
     user = get_user(request)
     viewDrive = Drives.objects.all()
@@ -201,16 +201,20 @@ def viewDrive(request):
     return render(request, 'campus/viewDrive.html', {'myData': myData, 'viewDrive': viewDrive})
 
 
-class applyDrive(View):
-    def get(self, request, drive_id):
-        sid = request.session.get('email')
-        print(sid)
-        job = ApplyDrive.objects.get(id=drive_id)
-        add = ApplyDrive(email=sid, job_id=job)
-        add.save()
-
-        return HttpResponse("<script>alert('Applied Successful!');window.location='/viewDrive';</script>")
+def applyDrive(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        full_name = request.POST['full_name']
+        if ApplyDrive.objects.filter(email=email, full_name=full_name).exists():
+            return HttpResponse("<script>alert('Already Applied!');window.location='/viewDrive';</script>")
+        else:
+            drive = ApplyDrive(email=email, full_name=full_name, job_name='TCS')
+            drive.save()
+            return HttpResponse("<script>alert('Applied Successful!');window.location='/viewDrive';</script>")
+    else:
+        redirect('applyDrive')
 
 
 def registerDrive(request):
-    return render(request, 'student')
+    viewDrive = Drives.objects.all()
+    return render(request, 'campus/registerDrive.html')

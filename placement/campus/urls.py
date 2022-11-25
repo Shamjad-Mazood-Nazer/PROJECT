@@ -19,7 +19,8 @@ urlpatterns = [
 
     path('viewDrive', views.viewDrive, name='viewDrive'),
     path('registerDrive', views.registerDrive, name='registerDrive'),
-    path('applyDrive/<drive_id>/', applyDrive.as_view(), name='applyDrive'),
+    path('applyDrive', views.applyDrive, name='applyDrive'),
+    # path('applyDrive/<drive_id>/', applyDrive.as_view(), name='applyDrive'),
 
     path('ajax_generate_code/', views.ajax_generate_code, name='ajax_generate_code'),
 

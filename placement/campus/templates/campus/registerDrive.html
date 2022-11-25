@@ -10,10 +10,45 @@
 
 </head>
 <body>
-    <div class="container">
-        <label for="mail"></label>
-        <input id="mail" type="email" name="email" placeholder="email" required autocomplete="off">
-        <span id="email" class="new"></span>
-    </div>
+<table align="center">
+    <form action="" method="post">
+        {% csrf_token %}
+            <tr>
+        <div class="form-group">
+            <td><label for="mail">Email :</label></td>
+            <td><input id="mail" type="email" name="email" placeholder="email" required autocomplete="off"></td>
+            <td><span id="email" class="new"></span></td>
+        </div></tr>
+
+        <div class="form-group">
+            <tr>
+                <td><label for="name">Full Name :</label></td>
+                <td><input id="name" type="text" name="full_name" placeholder="Full Name" required autocomplete="off"></td>
+                <td><span id="fname" class="new"></span></td>
+            </tr>
+        </div>
+
+<!--        <div class="form-group">-->
+<!--            <tr>-->
+<!--                <td><label for="drive">Drive Name :</label></td>-->
+<!--                <td><input id="drive" type="text" name="driv_name" placeholder="Full Name" required autocomplete="off"></td>-->
+<!--            </tr>-->
+<!--        </div>-->
+            <div class="form-group">
+            <tr>
+                <td>
+                    <a href="{% url 'applyDrive' %}">
+                        <button class="btn btn-primary">Save!</button>
+                    </a>
+                </td>
+                <td>
+                </td>
+            </tr>
+            </div>
+    </form>
+    <a href="{% url 'viewDrive' %}">
+        <button class="btn btn-danger">Back!</button>
+    </a>
+</table>
 </body>
 </html>
